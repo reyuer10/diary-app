@@ -40,6 +40,8 @@ export default function SideNavBar() {
       body: "",
     });
   };
+
+
   const { title, body } = diary;
 
   return (
