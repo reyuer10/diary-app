@@ -5,7 +5,7 @@ import { BiSolidMoon, BiMoon } from "react-icons/bi";
 import { GlobalContext } from "../GlobalContext";
 
 export default function SideNavBar() {
-  const { diary, setDiary, diaryList, setDiaryList } =
+  const { diary, setDiary, diaryList, setDiaryList, handleInputChange } =
     useContext(GlobalContext);
 
   const [newPost, setNewPost] = useState(false);
@@ -14,10 +14,6 @@ export default function SideNavBar() {
     setToggleDark(!toggleDark);
   };
 
-  const handleInputChage = (e) => {
-    const { name, value } = e.target;
-    setDiary({ ...diary, [name]: value });
-  };
 
   const newPostToggle = () => {
     setNewPost(!newPost);
@@ -79,11 +75,11 @@ export default function SideNavBar() {
             className="mx-5 mt-5 border-2 rounded-lg p-1"
             placeholder="Enter title"
             value={title}
-            onChange={(e) => handleInputChage(e)}
+            onChange={(e) => handleInputChange(e)}
             type="text"
           />
           <textarea
-            onChange={(e) => handleInputChage(e)}
+            onChange={(e) => handleInputChange(e)}
             id="body"
             name="body"
             value={body}

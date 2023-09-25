@@ -14,15 +14,18 @@ export default function App() {
   });
 
   const [isViewDiary, setIsViewDiary] = useState(false);
-  const [editNewValue, setEditNewValue] = useState({
-    newTItle: "",
-    newBody: ""
-  })
+  const [editNewValue, setEditNewValue] = useState(false);
 
   const handleView = (item) => {
     setIsViewDiary(!isViewDiary);
     setIsViewDiary(item);
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setDiary({ ...diary, [name]: value });
+  };
+
 
   return (
     <GlobalContext.Provider
@@ -34,6 +37,9 @@ export default function App() {
         isViewDiary,
         setIsViewDiary,
         handleView,
+        editNewValue,
+        setEditNewValue,
+        handleInputChange
       }}
     >
       <div className="flex">

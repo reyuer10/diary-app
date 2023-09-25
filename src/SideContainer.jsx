@@ -8,6 +8,7 @@ export default function SideContainer() {
 
   const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
 
+
   const deleteDiary = (id) => {
     setDiaryList(diaryList.filter((task) => task.id !== id));
     setIsDeleteConfirm(!isDeleteConfirm);
@@ -18,9 +19,6 @@ export default function SideContainer() {
     setIsDeleteConfirm(!isDeleteConfirm);
     setIsDeleteConfirm(itemDelete);
   };
-
-  //   const diaryTitleMinimize = diary.title.length > 10
-  //   diaryTitleMinimize ? diary.body.length = 5 + "..." : true
 
   return (
     <>
