@@ -7,13 +7,12 @@ import { GlobalContext } from "../GlobalContext";
 export default function SideNavBar() {
   const { diary, setDiary, diaryList, setDiaryList } =
     useContext(GlobalContext);
+
   const [newPost, setNewPost] = useState(false);
   const [toggleDark, setToggleDark] = useState(false);
   const handleToggleDark = () => {
     setToggleDark(!toggleDark);
   };
-
-
 
   const handleInputChage = (e) => {
     const { name, value } = e.target;
@@ -22,15 +21,24 @@ export default function SideNavBar() {
 
   const newPostToggle = () => {
     setNewPost(!newPost);
+    setDiary({
+      title: "",
+      body: "",
+    });
   };
 
   const addDiary = () => {
     const stack = {
       newDiary: diary,
-      id: diaryList.length === 0 ? 1 : diaryList[diaryList.length - 1].id + 1
-    }
+      id: diaryList.length === 0 ? 1 : diaryList[diaryList.length - 1].id + 1,
+    };
+
     setDiaryList([...diaryList, stack]);
     setNewPost(true);
+    setDiary({
+      title: "",
+      body: "",
+    });
   };
   const { title, body } = diary;
 
