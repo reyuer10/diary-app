@@ -14,6 +14,10 @@ export default function App() {
   });
 
   const [isViewDiary, setIsViewDiary] = useState(false);
+  const [editNewValue, setEditNewValue] = useState({
+    newTItle: "",
+    newBody: ""
+  })
 
   const handleView = (item) => {
     setIsViewDiary(!isViewDiary);

@@ -27,6 +27,8 @@ export default function SideNavBar() {
     });
   };
 
+  console.log(diary.title.length);
+
   const addDiary = () => {
     const stack = {
       newDiary: diary,
@@ -39,8 +41,13 @@ export default function SideNavBar() {
       title: "",
       body: "",
     });
-  };
 
+    if (diary.title.length === 0) {
+      diary.title = "No Title";
+    } else {
+      return diary.title;
+    }
+  };
 
   const { title, body } = diary;
 
@@ -81,7 +88,7 @@ export default function SideNavBar() {
             name="body"
             value={body}
             placeholder="Enter your diary..."
-            className="text-slate-700 p-3 border-2 border-box m-4 rounded-2xl h-20 shadow-lg"
+            className="text-slate-700 p-3 border-2 border-box m-4 rounded-2xl shadow-lg resize-none overflow-auto"
             cols="30"
             rows="4"
           ></textarea>

@@ -3,13 +3,15 @@ import { GlobalContext } from "./GlobalContext";
 import { PiXBold } from "react-icons/pi";
 
 export default function SideContainer() {
-  const { diaryList, handleView, setDiaryList } = useContext(GlobalContext);
+  const { diaryList, handleView, setDiaryList, setIsViewDiary, isViewDiary
+  } = useContext(GlobalContext);
 
   const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
 
   const deleteDiary = (id) => {
     setDiaryList(diaryList.filter((task) => task.id !== id));
     setIsDeleteConfirm(!isDeleteConfirm);
+    setIsViewDiary(false);
   };
 
   const handleOpenConfirmation = (itemDelete) => {
