@@ -4,9 +4,13 @@ import { GlobalContext } from "../GlobalContext";
 export default function Container() {
   const { isViewDiary } = useContext(GlobalContext);
 
-  const [newTitle, setNewTitle] = useState(isViewDiary.newDiary.title);
-  const [newBody, setNewBody] = useState(isViewDiary.newDiary.body);
-
+  const [newTitle, setNewTitle] = useState(
+    isViewDiary && isViewDiary.newDiary && isViewDiary.newDiary.title
+  );
+  const [newBody, setNewBody] = useState(
+    isViewDiary && isViewDiary.newDiary && isViewDiary.newDiary.body
+  );
+console.log(isViewDiary && isViewDiary.newDiary && isViewDiary.newDiary.body)
   const [isEditValue, setIsEditValue] = useState(false);
 
   const handleEdit = () => {
@@ -14,17 +18,26 @@ export default function Container() {
   };
 
   const handleSave = () => {
-    setIsEditValue(isEditValue);
+    setIsEditValue(!isEditValue);
   };
 
-  isEditValue;
   return (
     <div className="flex flex-col font-kanit">
       <div>
         {isEditValue && (
-          <div>
-            <button onClick={() => handleSave()}>Save</button>
-            <button onClick={() => setIsEditValue(false)}>Cancel</button>
+          <div className="m-5 float-right space-x-5">
+            <button
+              className="px-4 py-1.5 bg-slate-300 text-slate-700 rounded-full"
+              onClick={() => handleSave()}
+            >
+              Save
+            </button>
+            <button
+              className="px-4 py-1.5 bg-slate-300 text-slate-700 rounded-full"
+              onClick={() => setIsEditValue(false)}
+            >
+              Cancel
+            </button>
           </div>
         )}
         {!isEditValue ? (
@@ -34,7 +47,7 @@ export default function Container() {
           >
             Edit
           </button>
-        ) : null}
+        ): null}
       </div>
 
       <div className="border-2 border-slate-700 shadow ring-1 rounded-lg min-h-[80vh] w-[100vh] p-3 m-3">
@@ -46,11 +59,15 @@ export default function Container() {
                   onChange={(e) => setNewTitle(e.target.value)}
                   value={newTitle}
                   type="text"
+                  name="newTitle"
+                  id="newTitle"
                 />
                 <input
                   onChange={(e) => setNewBody(e.target.value)}
                   value={newBody}
                   type="text"
+                  name="newBody"
+                  id="newBody"
                 />
               </div>
             ) : (

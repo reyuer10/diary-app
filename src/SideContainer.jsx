@@ -3,7 +3,7 @@ import { GlobalContext } from "./GlobalContext";
 import { PiXBold } from "react-icons/pi";
 
 export default function SideContainer() {
-  const { diaryList, handleView, setDiaryList, setIsViewDiary, isViewDiary
+  const { diaryList, handleView, setDiaryList, setIsViewDiary,
   } = useContext(GlobalContext);
 
   const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);

@@ -39,7 +39,7 @@ export default function App() {
         handleView,
         editNewValue,
         setEditNewValue,
-        handleInputChange
+        handleInputChange,
       }}
     >
       <div className="flex">
