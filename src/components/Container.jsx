@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { GlobalContext } from "../GlobalContext";
 export default function Container() {
-  const { isViewDiary, diaryList } = useContext(GlobalContext);
-
-  const [isEditValue, setIsEditValue] = useState(false);
+  const {
+    isViewDiary,
+    isEditValue,
+    setIsEditValue,
+    setDiaryList,
+    diaryList,
+    setIsViewDiary,
+  } = useContext(GlobalContext);
 
   const [newTitle, setNewTitle] = useState("");
   const [newBody, setNewBody] = useState("");
@@ -16,7 +21,27 @@ export default function Container() {
     }
   }, [isViewDiary]);
 
-  const handleEdit = () => {
+  const handleEdit = (id, newTitleValue, newBodyValue) => {
+    const diaryValueUpdate = diaryList.map((stack) => {
+      if (stack.id === id) {
+        return {
+          ...stack,
+          newDiary: {
+            ...stack.newDiary,
+            title: newTitleValue,
+            body: newBodyValue,
+          },
+        };
+      }
+      return stack;
+    });
+
+    setDiaryList(diaryValueUpdate);
+  };
+
+  const onEditDiary = () => {
+    handleEdit(isViewDiary.id, newTitle, newBody);
+    setIsViewDiary(!isViewDiary);
     setIsEditValue(!isEditValue);
   };
 
@@ -26,18 +51,21 @@ export default function Container() {
 
   const handleCancelButton = () => {
     setIsEditValue(!isEditValue);
+    setNewTitle(isViewDiary.newDiary.title);
+    setNewBody(isViewDiary.newDiary.body);
   };
 
   return (
     <div className="flex flex-col font-kanit">
+      {/* Editing Button = Edit, Cancel and Save */}
       <div>
         {isEditValue && (
           <div className="m-5 float-right space-x-5">
             <button
-              className="px-4 py-1.5 bg-slate-300 text-slate-700 rounded-full"
-              onClick={() => handleSave()}
+              className="px-4 py-1.5 bg-slate-300 text-green-700 rounded-full "
+              onClick={() => onEditDiary()}
             >
-              Save
+              Save changes
             </button>
             <button
               className="px-4 py-1.5 bg-slate-300 text-slate-700 rounded-full"
@@ -49,27 +77,36 @@ export default function Container() {
         )}
         {!isEditValue ? (
           <button
-            onClick={() => handleEdit(isViewDiary.id)}
+            onClick={() => handleSave()}
             className="float-right m-5 px-4 py-1.5 rounded-full bg-slate-300 text-slate-700 font-bold"
           >
             Edit
           </button>
         ) : null}
       </div>
-      {/*  */}
-      <div className="border-2 border-slate-700 shadow ring-1 rounded-lg min-h-[40vh] w-[100vh] p-3 m-3 relative">
+
+      <div
+        className={`${
+          isEditValue ? "border-amber-500" : "border-slate-700"
+        } border-2 transition-all duration-100 shadow ring-1 rounded-lg min-h-[40vh] w-[100vh] p-3 m-3 relative`}
+      >
         {isViewDiary ? (
           <>
             {isEditValue ? (
-              <div>
+              <div className="flex flex-col">
+                <p className="text-lg text-slate-500">Title: </p>
                 <input
+                  className="font-bold text-xl mx-7 outline-none"
                   onChange={(e) => setNewTitle(e.target.value)}
                   value={newTitle}
                   type="text"
                   name="newTitle"
                   id="newTitle"
                 />
+                <p className="text-lg text-slate-500">Diary: </p>
+
                 <input
+                  className="px-5 outline-none"
                   onChange={(e) => setNewBody(e.target.value)}
                   value={newBody}
                   type="text"

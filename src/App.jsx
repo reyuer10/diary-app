@@ -15,10 +15,12 @@ export default function App() {
 
   const [isViewDiary, setIsViewDiary] = useState(null);
   const [editNewValue, setEditNewValue] = useState(false);
+  const [isEditValue, setIsEditValue] = useState(false);
 
   const handleView = (item) => {
     setIsViewDiary(!isViewDiary);
     setIsViewDiary(item);
+    setIsEditValue(false);
   };
 
   const handleInputChange = (e) => {
@@ -39,6 +41,8 @@ export default function App() {
         editNewValue,
         setEditNewValue,
         handleInputChange,
+        isEditValue,
+        setIsEditValue,
       }}
     >
       <div className="flex">
