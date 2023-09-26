@@ -1,19 +1,25 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { PiBookBold } from "react-icons/pi";
 
 import { BiSolidMoon, BiMoon } from "react-icons/bi";
 import { GlobalContext } from "../GlobalContext";
 
 export default function SideNavBar() {
-  const { diary, setDiary, diaryList, setDiaryList, handleInputChange } =
-    useContext(GlobalContext);
+  const {
+    diary,
+    setDiary,
+    diaryList,
+    setDiaryList,
+    handleInputChange,
+    setValueDate,
+    valueDate,
+  } = useContext(GlobalContext);
 
   const [newPost, setNewPost] = useState(false);
   const [toggleDark, setToggleDark] = useState(false);
   const handleToggleDark = () => {
     setToggleDark(!toggleDark);
   };
-
 
   const newPostToggle = () => {
     setNewPost(!newPost);
@@ -29,6 +35,7 @@ export default function SideNavBar() {
     const stack = {
       newDiary: diary,
       id: diaryList.length === 0 ? 1 : diaryList[diaryList.length - 1].id + 1,
+      dateCreated: new Date().toLocaleString()
     };
 
     setDiaryList([...diaryList, stack]);
@@ -43,6 +50,7 @@ export default function SideNavBar() {
     } else {
       return diary.title;
     }
+
   };
 
   const { title, body } = diary;

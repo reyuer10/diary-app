@@ -3,7 +3,7 @@ import { GlobalContext } from "./GlobalContext";
 import { PiXBold } from "react-icons/pi";
 
 export default function SideContainer() {
-  const { diaryList, handleView, setDiaryList, setIsViewDiary } =
+  const { diaryList, handleView, setDiaryList, setIsViewDiary,valueDate } =
     useContext(GlobalContext);
 
   const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
@@ -56,6 +56,9 @@ export default function SideContainer() {
               <p className="font-normal text-sm mx-7 text-slate-400">
                 {stack.newDiary.body.length > 10 ?
                   stack.newDiary.body.slice(0, 7) + "..." : stack.newDiary.body}
+              </p>
+              <p>
+                    Date created: {stack.dateCreated.toLocaleString()}
               </p>
             </div>
             <div className=" flex items-center ">

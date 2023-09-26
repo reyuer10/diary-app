@@ -7,6 +7,7 @@ import Container from "./components/Container";
 import { GlobalContext } from "../src/GlobalContext";
 
 export default function App() {
+
   const [diaryList, setDiaryList] = useState([]);
   const [diary, setDiary] = useState({
     title: "",
@@ -25,7 +26,6 @@ export default function App() {
     const { name, value } = e.target;
     setDiary({ ...diary, [name]: value });
   };
-
 
   return (
     <GlobalContext.Provider
@@ -47,7 +47,7 @@ export default function App() {
           <SideNavBar />
           <SideContainer />
         </div>
-        <div>
+        <div className="w-1/2">
           <Container />
         </div>
       </div>

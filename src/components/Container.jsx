@@ -7,10 +7,12 @@ export default function Container() {
   const [newTitle, setNewTitle] = useState(
     isViewDiary && isViewDiary.newDiary && isViewDiary.newDiary.title
   );
+
   const [newBody, setNewBody] = useState(
     isViewDiary && isViewDiary.newDiary && isViewDiary.newDiary.body
   );
-  console.log(isViewDiary && isViewDiary.newDiary && isViewDiary.newDiary.body);
+
+
   const [isEditValue, setIsEditValue] = useState(false);
 
   const handleEdit = () => {
@@ -56,7 +58,7 @@ export default function Container() {
         ) : null}
       </div>
       {/*  */}
-      <div className="border-2 border-slate-700 shadow ring-1 rounded-lg min-h-[40vh] w-[100vh]  p-3 m-3 relative">
+      <div className="border-2 border-slate-700 shadow ring-1 rounded-lg min-h-[40vh] w-[100vh] p-3 m-3 relative">
         {isViewDiary ? (
           <>
             {isEditValue ? (
@@ -79,12 +81,14 @@ export default function Container() {
             ) : (
               <>
                 <div>
-                  <div className="w-32 bg-slate-300" key={isViewDiary.id}>
-                    <p className="font-bold text-xl mx-7">
-                      {isViewDiary.newDiary.title}
-                    </p>
-                    <p className="bg-slate-700">{isViewDiary.newDiary.body}</p>
-                  </div>
+                    <div key={isViewDiary.id}>
+                      <p className="font-bold text-xl mx-7">
+                        {isViewDiary.newDiary.title}
+                      </p>
+                      <p className="px-5">
+                        {isViewDiary.newDiary.body}
+                      </p>
+                    </div>
                 </div>
               </>
             )}
