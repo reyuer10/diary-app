@@ -7,17 +7,13 @@ import Container from "./components/Container";
 import { GlobalContext } from "../src/GlobalContext";
 
 export default function App() {
-<<<<<<< HEAD
-
-=======
->>>>>>> 217e448ebe7b6f7addefba716a742a3948aef0d7
   const [diaryList, setDiaryList] = useState([]);
   const [diary, setDiary] = useState({
     title: "",
     body: "",
   });
 
-  const [isViewDiary, setIsViewDiary] = useState(false);
+  const [isViewDiary, setIsViewDiary] = useState(null);
   const [editNewValue, setEditNewValue] = useState(false);
 
   const handleView = (item) => {
@@ -30,10 +26,6 @@ export default function App() {
     setDiary({ ...diary, [name]: value });
   };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 217e448ebe7b6f7addefba716a742a3948aef0d7
   return (
     <GlobalContext.Provider
       value={{
@@ -54,11 +46,7 @@ export default function App() {
           <SideNavBar />
           <SideContainer />
         </div>
-<<<<<<< HEAD
         <div className="w-1/2">
-=======
-        <div>
->>>>>>> 217e448ebe7b6f7addefba716a742a3948aef0d7
           <Container />
         </div>
       </div>

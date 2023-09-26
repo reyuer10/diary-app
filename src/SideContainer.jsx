@@ -1,22 +1,16 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "./GlobalContext";
-import { PiXBold } from "react-icons/pi";
+import StackValue from "./components/StackValue";
+import Container from "./components/Container";
 
 export default function SideContainer() {
-<<<<<<< HEAD
-  const { diaryList, handleView, setDiaryList, setIsViewDiary,valueDate } =
+  const { diaryList, handleView, setDiaryList, setIsViewDiary } =
     useContext(GlobalContext);
 
   const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
 
-=======
-  const { diaryList, handleView, setDiaryList, setIsViewDiary,
-  } = useContext(GlobalContext);
+  
 
-  const [isDeleteConfirm, setIsDeleteConfirm] = useState(false);
-
-
->>>>>>> 217e448ebe7b6f7addefba716a742a3948aef0d7
   const deleteDiary = (id) => {
     setDiaryList(diaryList.filter((task) => task.id !== id));
     setIsDeleteConfirm(!isDeleteConfirm);
@@ -53,38 +47,7 @@ export default function SideContainer() {
           </div>
         )}
         {diaryList.map((stack) => (
-          <div
-            onClick={() => handleView(stack)}
-            key={stack.id}
-            className="flex justify-between m-4 border-2 rounded-full relative cursor-pointer hover:bg-slate-300 transition-all"
-          >
-            <div>
-              <p className="font-bold text-xl text-slate-500 mx-7">
-                {stack.newDiary.title}{" "}
-              </p>
-              <p className="font-normal text-sm mx-7 text-slate-400">
-<<<<<<< HEAD
-                {stack.newDiary.body.length > 10 ?
-                  stack.newDiary.body.slice(0, 7) + "..." : stack.newDiary.body}
-              </p>
-              <p>
-                    Date created: {stack.dateCreated.toLocaleString()}
-=======
-                {stack.newDiary.body}
->>>>>>> 217e448ebe7b6f7addefba716a742a3948aef0d7
-              </p>
-            </div>
-            <div className=" flex items-center ">
-              {!isDeleteConfirm && (
-                <button
-                  className="rounded-full text-slate-500 mr-4"
-                  onClick={() => handleOpenConfirmation(stack)}
-                >
-                  <PiXBold size={17} />
-                </button>
-              )}
-            </div>
-          </div>
+       <StackValue key={stack.id} stack={stack} handleOpenConfirmation={handleOpenConfirmation} />
         ))}
       </div>
     </>
