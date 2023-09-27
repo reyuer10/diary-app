@@ -1,10 +1,14 @@
 import React from "react";
 import { useState } from "react";
 
-import SideNavBar from "./components/SideNavBar";
-import SideContainer from "./SideContainer";
+
 import Container from "./components/Container";
 import { GlobalContext } from "../src/GlobalContext";
+
+// react routes
+import { Routes, Route } from "react-router-dom";
+import Settings from "./components/Settings";
+import RootLayout from "./layout/RootLayout";
 
 export default function App() {
   const [diaryList, setDiaryList] = useState([]);
@@ -16,6 +20,7 @@ export default function App() {
   const [isViewDiary, setIsViewDiary] = useState(null);
   const [editNewValue, setEditNewValue] = useState(false);
   const [isEditValue, setIsEditValue] = useState(false);
+  const [isSettingsActive, setIsSettingsActive] = useState(false);
 
   const handleView = (item) => {
     setIsViewDiary(!isViewDiary);
@@ -43,17 +48,16 @@ export default function App() {
         handleInputChange,
         isEditValue,
         setIsEditValue,
+        isSettingsActive,
+        setIsSettingsActive,
       }}
     >
-      <div className="flex">
-        <div className="w-[300px] border-r-2 relative h-screen">
-          <SideNavBar />
-          <SideContainer />
-        </div>
-        <div className="w-1/2">
-          <Container />
-        </div>
-      </div>
+      <Routes>
+        <Route element={<RootLayout />}>
+          <Route path="/" element={<Container />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
+      </Routes>
     </GlobalContext.Provider>
   );
 }

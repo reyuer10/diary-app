@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { GlobalContext } from "./GlobalContext";
 import StackValue from "./components/StackValue";
-import Container from "./components/Container";
 
 export default function SideContainer() {
   const { diaryList, handleView, setDiaryList, setIsViewDiary } =

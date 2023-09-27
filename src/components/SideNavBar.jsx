@@ -2,17 +2,27 @@ import React, { useState, useContext } from "react";
 import { PiBookBold } from "react-icons/pi";
 
 import { BiSolidMoon, BiMoon } from "react-icons/bi";
+import {
+  PiGearSixBold,
+  PiGearSixFill,
+  PiUserBold,
+  PiNotebookBold,
+  PiNotebookFill,
+} from "react-icons/pi";
 import { GlobalContext } from "../GlobalContext";
-
+import { useNavigate } from "react-router-dom";
 export default function SideNavBar() {
   const {
     diary,
     setDiary,
     diaryList,
     setDiaryList,
-    handleInputChange
+    handleInputChange,
+    isSettingsActive,
+    setIsSettingsActive,
   } = useContext(GlobalContext);
 
+  const navigate = useNavigate();
   const [newPost, setNewPost] = useState(false);
   const [toggleDark, setToggleDark] = useState(false);
   const handleToggleDark = () => {
@@ -27,13 +37,15 @@ export default function SideNavBar() {
     });
   };
 
-  console.log(diary.title.length);
+  const handleSettings = () => {
+    setIsSettingsActive(!isSettingsActive);
+    navigate("/settings");
+  };
 
   const addDiary = () => {
     const stack = {
       newDiary: diary,
       id: diaryList.length === 0 ? 1 : diaryList[diaryList.length - 1].id + 1,
-      dateCreated: new Date().toLocaleString()
     };
 
     setDiaryList([...diaryList, stack]);
@@ -55,29 +67,43 @@ export default function SideNavBar() {
   return (
     <div className="font-kanit">
       <div className="w-full justify-center flex flex-col">
-        <div className="m-3 flex items-center justify-end space-x-2">
-          <button className="px-4 py-1.5 rounded-full bg-slate-700 text-white font-normal text-sm">
-            My profile
+        <div className="m-3 flex space-x-1 justify-evenly border-b py-2 border-slate-300">
+          <button className="text-[#303030]">
+            <PiUserBold size={25} />
           </button>
 
           <button
             onClick={newPostToggle}
-            className=" float-right transition-all  hover:bg-slate-500 ease-in-out duration-75 font-normal text-sm bg-slate-700 rounded-full text-white px-4 py-1.5"
+            className="transition-all ease-in-out duration-75 font-normal text-sm  text-[#303030]"
           >
-            {newPost ? <p>New Diary</p> : <p>Cancel</p>}
+            {newPost ? (
+              <PiNotebookBold size={25} />
+            ) : (
+              <PiNotebookFill size={25} />
+            )}
           </button>
           <button
             onClick={handleToggleDark}
-            className="text-sm font-bold flex items-center bg-slate-700 px-2 py-2 rounded-full text-white"
+            className=" flex items-center text-[#303030]"
           >
-            {toggleDark ? <BiSolidMoon size={18} /> : <BiMoon size={18} />}
+            {toggleDark ? <BiSolidMoon size={25} /> : <BiMoon size={25} />}
+          </button>
+          <button
+            className="text-[#303030]"
+            onClick={() => handleSettings()}
+          >
+            {isSettingsActive ? (
+              <PiGearSixFill size={25} />
+            ) : (
+              <PiGearSixBold size={25} />
+            )}
           </button>
         </div>
         <div className={newPost ? "hidden" : "flex flex-col"}>
           <input
             id="title"
             name="title"
-            className="mx-5 mt-5 border-2 rounded-lg p-1"
+            className="mx-5 mt-5 border-2 rounded-lg p-1 pl-3"
             placeholder="Enter title"
             value={title}
             onChange={(e) => handleInputChange(e)}

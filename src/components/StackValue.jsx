@@ -20,7 +20,6 @@ export default function StackValue({ stack, handleOpenConfirmation }) {
             ? stack.newDiary.body.slice(0, 7) + "..."
             : stack.newDiary.body}
         </p>
-        <p>Date created: {stack.dateCreated.toLocaleString()}</p>
       </div>
       <div className=" flex items-center ">
         {!isDeleteConfirm && (

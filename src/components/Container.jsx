@@ -62,13 +62,13 @@ export default function Container() {
         {isEditValue && (
           <div className="m-5 float-right space-x-5">
             <button
-              className="px-4 py-1.5 bg-slate-300 text-green-700 rounded-full "
+              className="px-4 py-1.5 bg-slate-300 text-green-700 rounded-full font-bold"
               onClick={() => onEditDiary()}
             >
               Save changes
             </button>
             <button
-              className="px-4 py-1.5 bg-slate-300 text-slate-700 rounded-full"
+              className="px-4 py-1.5 bg-slate-300 text-slate-700 rounded-full font-bold"
               onClick={() => handleCancelButton()}
             >
               Cancel
@@ -118,10 +118,10 @@ export default function Container() {
               <>
                 <div>
                   <div key={isViewDiary.id}>
-                    <p className="font-bold text-xl mx-7">
+                    <p className="font-bold text-xl mx-7 text-slate-700">
                       {isViewDiary.newDiary.title}
                     </p>
-                    <p className="px-5">{isViewDiary.newDiary.body}</p>
+                    <p className="mx-7 text-normal">{isViewDiary.newDiary.body}</p>
                   </div>
                 </div>
               </>
